@@ -1,0 +1,27 @@
+﻿@using Spifel.Web.Feature.Account.Register
+@model RegisterVM
+
+@{
+    ViewData["Title"] = "ثبت نام موفق";
+}
+
+@* <div class="container">
+    <div class="alert alert-success">
+        <h2>@Model.UserName خوش آمدید</h2>
+        <p class="text-muted">
+            ثبت نام شما انجام شد .<br />
+            پیامی حاوی لینک فعال سازی به @Model.Email ارسال شد . با کلیک بر آن اکانت شما فعال می شود
+        </p>
+    </div>
+</div> *@
+<div class="auth-container">
+    <div class="auth-title mb-3">@Model.UserName خوش اومدی </div>
+    <!-- start of auth-box -->
+    <div class="auth-box ui-box">
+        <div class="fs-6 fw-bold text-dark text-center mb-3">حساب کاربری شما ساخته شد</div>
+        <div class="fs-7 fw-bold text-muted text-center mb-3">
+            پیامی حاوی لینک فعال سازی به @Model.Email ارسال شد <br /> با کلیک بر آن اکانت شما فعال می شود
+        </div>
+    </div>
+    <!-- end of auth-box -->
+</div>

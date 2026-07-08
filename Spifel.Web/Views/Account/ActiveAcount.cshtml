@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "فعال سازی ایمیل";
+}
+
+<div class="container">
+    @if (ViewBag.IsAccoutActive == true)
+    {
+        <div class="alert alert-success">
+            <h2>ایمیلت فعال شد جیگر !</h2>
+            <p class="text-muted">
+               الان به همه ی اماکانات سایت دسترسی داری.
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <h2>ایمیلت فعال نشد که !</h2>
+            <p class="text-muted">
+                بازم تلاش کن اگه باز نشد یه سر بیا پشتیبانی
+            </p>
+        </div>
+    }
+</div>

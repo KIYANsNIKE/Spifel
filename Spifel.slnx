@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Application/">
+    <Project Path="Spifel.Application/Spifel.Application.csproj" />
+  </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="Spifel.Domain/Spifel.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure.Data/">
+    <Project Path="Spifel.Infra.Data/Spifel.Infra.Data.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure.IoC/">
+    <Project Path="Spifel.Infra.IoC/Spifel.Infra.IoC.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Spifel.Web/Spifel.Web.csproj" />
+  </Folder>
+</Solution>
