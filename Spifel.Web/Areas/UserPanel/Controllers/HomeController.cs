@@ -8,5 +8,9 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
         {
             return View();
         }
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
     }
 }

@@ -3,10 +3,10 @@
         <div class="profile-detail">
             <div class="d-flex align-items-center">
                 <div class="profile-avatar me-3">
-                    <img src="./theme-assets/images/avatar/default.png" alt="avatar">
+                    <img src="/theme-assets/images/avatar/default.png" alt="avatar">
                 </div>
                 <div class="profile-info">
-                    <a href="#" class="text-decoration-none text-dark fw-bold mb-2">
+                    <a asp-area="UserPanel" asp-controller="Home" asp-action="Index" class="text-decoration-none text-dark fw-bold mb-2">
                         @User.Identity.Name
                     </a>
                     <div class="text-muted fs-7 fw-bold">۰۹xxxxxxxxx</div>
@@ -22,12 +22,6 @@
                                 افزایش
                                 موجودی <i class="ri-arrow-left-s-line"></i>
                             </a>
-                        </span>
-                    </li>
-                    <li>
-                        <span class="label">باشگاه مشتریان</span>
-                        <span class="detail">
-                            <span class="d-block">۰ <span class="score text-muted fs-7">امتیاز</span></span>
                         </span>
                     </li>
                 </ul>
@@ -57,12 +51,6 @@
                 <a class="nav-link" href="#">
                     <i class="nav-link-icon ri-map-pin-line"></i> نشانی
                     ها
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="nav-link-icon ri-gift-line"></i> کارت های
-                    هدیه
                 </a>
             </li>
             <li class="nav-item">
