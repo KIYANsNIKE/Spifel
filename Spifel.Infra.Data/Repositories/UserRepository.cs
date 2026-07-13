@@ -60,7 +60,7 @@ namespace Spifel.Infra.Data.Repositories
             return await context.Users.SingleOrDefaultAsync(u => u.EmailActiveCode == activeCode);
         }
 
-        public async Task<User?> GetUserByEmailOrUserName(string emailOrUserName)
+        public async Task<User?> GetUserByEmailOrUserNameAsync(string emailOrUserName)
         {
             return await context.Users.SingleOrDefaultAsync(u =>
             u.UserName == emailOrUserName ||

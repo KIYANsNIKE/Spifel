@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Spifel.Application.Generator;
 using Spifel.Application.Mapper;
 using Spifel.Application.Security;
+using Spifel.Application.Services.Implementations.Features.ChangePassword;
 using Spifel.Application.Services.Implementations.Features.Login;
 using Spifel.Application.Services.Implementations.Features.Register;
 using Spifel.Application.Services.Interfaces;
@@ -34,9 +35,25 @@ namespace Spifel.Application.Services.Implementations
             return true;
         }
 
+        public async Task<Result> ChangePasswordAsync(ChangePasswordDto dto)
+        {
+            var user = await _userRepository.GetUserByIdAsync(dto.UserId);
+
+            if (!PasswordHelper.VerifyPassword(dto.OldPassword, user.Password))
+                return Result<User>.Failure(Error.Forbidden(ErrorCode.PasswordMismatch.ToString(), "رمز عبور صحیح نیست"));
+
+            user.Password = PasswordHelper.HashPassword(dto.NewPassword);
+
+            await _userRepository.UpdateAsync(user);
+            await _userRepository.SaveAsync();
+
+            return Result.Success();
+
+        }
+
         public async Task<Result<User>> LoginUserAsync(LoginDto dto)
         {
-            var user = await _userRepository.GetUserByEmailOrUserName(dto.UserNameOrEmail);
+            var user = await _userRepository.GetUserByEmailOrUserNameAsync(dto.UserNameOrEmail);
             if (user == null || user.IsDeleted)
                 return Result<User>.Failure(Error.NotFound(ErrorCode.UserNotFound.ToString(), "کاربر یافت نشد"));
 

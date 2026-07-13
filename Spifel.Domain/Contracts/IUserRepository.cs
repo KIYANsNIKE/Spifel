@@ -16,7 +16,7 @@ namespace Spifel.Domain.Contracts
         Task<bool> IsEmailExist(string email);
         Task<bool> IsUserNameExist(string userName);
         Task<User?> GetUserByActiveCodeAsync(string activeCode);
-        Task<User?> GetUserByEmailOrUserName(string emailOrUserName);
+        Task<User?> GetUserByEmailOrUserNameAsync(string emailOrUserName);
         Task SaveAsync();
     }
 }

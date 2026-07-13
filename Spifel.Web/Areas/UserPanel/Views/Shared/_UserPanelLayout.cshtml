@@ -11,3 +11,10 @@
         </div>
     </div>
 </div>
+@if (IsSectionDefined("Scripts"))
+{
+    @section Scripts
+    {
+        @RenderSection("Scripts",false)
+    }
+}
