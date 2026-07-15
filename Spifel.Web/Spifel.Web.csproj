@@ -28,6 +28,7 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
 		<PackageReference Include="NuGet.Packaging" Version="7.6.0" />
 		<PackageReference Include="NuGet.Protocol" Version="7.6.0" />
+		<PackageReference Include="System.Drawing.Common" Version="10.0.9" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -35,6 +36,12 @@
 	  <ProjectReference Include="..\Spifel.Domain\Spifel.Domain.csproj" />
 	  <ProjectReference Include="..\Spifel.Infra.Data\Spifel.Infra.Data.csproj" />
 	  <ProjectReference Include="..\Spifel.Infra.IoC\Spifel.Infra.IoC.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Reference Include="ASPSnippets.Core.Captcha">
+	    <HintPath>..\..\..\..\Downloads\ASPSnippets.Core.Captcha.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

@@ -1,8 +1,10 @@
-﻿using FluentValidation.Results;
+﻿using ASPSnippets.Core.Captcha;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
+using Newtonsoft.Json;
 using Spifel.Application.Services.Interfaces;
 using Spifel.Application.Shared.Validations;
 using Spifel.Domain.Common.Result;
@@ -15,7 +17,19 @@ namespace Spifel.Web.Controllers
 {
     public class AccountController(IAccountService _accountService) : Controller
     {
-
+        #region Captcha
+        public Captcha captcha
+        {
+            get
+            {
+                return JsonConvert.DeserializeObject<Captcha>(TempData["Captcha"].ToString());
+            }
+            set
+            {
+                TempData["Captcha"] = JsonConvert.SerializeObject(value);
+            }
+        }
+        #endregion
         #region Register
         [Route("Register")]
         public IActionResult Register()
@@ -65,6 +79,9 @@ namespace Spifel.Web.Controllers
             {
                 return Redirect("/");
             }
+
+            captcha = new Captcha();
+            
             ViewBag.ReturnUrl = returnUrl;
             return View(new LoginVM());
         }
