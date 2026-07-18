@@ -1,0 +1,62 @@
+﻿@switch (TempData["Alert"]?.ToString())
+{
+    case "PasswordChanged":
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'رمز عبور شما با موفقیت تغییر کرد',
+                html: `
+                 <p>لطفاً مجدداً وارد سایت شوید.</p>
+                 <p>چند ثانیه دیگر به صورت خودکار از حساب کاربری خارج خواهید شد.</p>
+                             `,
+                confirmButtonText: 'ورود مجدد',
+                confirmButtonColor: '#3085d6',
+
+                timer: 5000,
+                timerProgressBar: true,
+
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                showCloseButton: false,
+                stopKeydownPropagation: true
+
+            }).then(() => {
+
+                window.location.href = '@Url.Action("Logout", "Account", new { area = "" })';
+
+            });
+        </script>
+        break;
+}
+
+
+@* @if (TempData["PasswordChanged"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'رمز عبور شما با موفقیت تغییر کرد',
+            html: `
+             <p>لطفاً مجدداً وارد سایت شوید.</p>
+             <p>چند ثانیه دیگر به صورت خودکار از حساب کاربری خارج خواهید شد.</p>
+                         `,
+            confirmButtonText: 'ورود مجدد',
+            confirmButtonColor: '#3085d6',
+
+            timer: 5000,
+            timerProgressBar: true,
+
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            showCloseButton: false,
+            stopKeydownPropagation: true
+
+        }).then(() => {
+
+            window.location.href = '@Url.Action("Logout", "Account", new { area = "" })';
+
+        });
+    </script>
+} *@

@@ -11,7 +11,6 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
 
         public IActionResult ChangePassword()
         {
-            var x = TempData["PasswordChanged"];
             return View();
         }
         [HttpPost,ValidateAntiForgeryToken]
@@ -32,8 +31,8 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
                 ModelState.AddResultErrors(result.Errors);
                 return View(VM);
             }
-            
-            TempData["PasswordChanged"] = true;
+
+            TempData["Alert"] = "PasswordChanged";
             return RedirectToAction(nameof(ChangePassword));
         }
     }
