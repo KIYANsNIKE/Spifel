@@ -18,7 +18,7 @@ namespace Spifel.Web.Controllers
     public class AccountController(IAccountService _accountService) : Controller
     {
         #region Captcha
-        public Captcha captcha
+        public Captcha Captcha
         {
             get
             {
@@ -80,20 +80,27 @@ namespace Spifel.Web.Controllers
                 return Redirect("/");
             }
 
-            captcha = new Captcha();
+            this.Captcha = new Captcha(140);
             
             ViewBag.ReturnUrl = returnUrl;
-            return View(new LoginVM());
+            return View(new LoginVM() { ImageData = this.Captcha.ImageData});
         }
+
+        // باید کپچا رو تمیز بنویسم 
 
         [HttpPost("Login")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM loginVM, string returnUrl)
         {
-            var validationResult = await new LoginVmValidator().ValidateAsync(loginVM);
+            var validationResult = await new LoginVmValidator(Captcha).ValidateAsync(loginVM);
             if (!validationResult.IsValid)
             {
                 ModelState.AddFluentValidationErrors(validationResult);
+                if (validationResult.Errors.Any(e=>e.PropertyName == "CaptchaAnswer"))
+                {
+                    this.Captcha = new Captcha(140);
+                    loginVM.ImageData = this.Captcha.ImageData;
+                }
                 return View(loginVM);
             }
 
@@ -107,6 +114,11 @@ namespace Spifel.Web.Controllers
                 //only normal errors not "UserNotActive"
                 var errors = result.Errors.Where(e => e.Code != ErrorCode.UserNotActive.ToString()).ToList();
                 ModelState.AddResultErrors(errors);
+
+                //ADD Captcha
+                this.Captcha = new Captcha(140);
+                loginVM.ImageData = this.Captcha.ImageData;
+
                 return View(loginVM);
             }
 

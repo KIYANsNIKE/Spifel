@@ -3,11 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using Spifel.Infra.Data.Context;
 using Spifel.Infra.IoC;
 using System.Text.Encodings.Web;
+using System.Text.Json.Serialization;
 using System.Text.Unicode;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(option =>
+    {
+        var converter = new JsonStringEnumConverter();
+        option.JsonSerializerOptions.Converters.Add(converter);
+    });
 
 #region Config Unicode
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[]

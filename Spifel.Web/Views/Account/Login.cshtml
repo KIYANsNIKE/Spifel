@@ -1,6 +1,7 @@
 ﻿@model Spifel.Web.Feature.Account.Login.LoginVM
 @{
     ViewData["Title"] = "ورود به سایت";
+    TempData.Keep("Captcha");
 }
 <!-- start of auth-container -->
 <div class="auth-container">
@@ -19,6 +20,22 @@
                 <input asp-for="Password" type="password" class="form-control" placeholder="کلمه عبور">
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <div class="form-element-row mb-2">
+                <div class="d-flex justify-content-center align-items-center gap-2">
+
+                    <img src="@Model.ImageData"
+                         class="form-control border rounded" />
+
+                    <button type="button" class="btn btn-outline-primary">
+                        <i class="ri-refresh-line"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="form-element-row mb-2">
+                <input asp-for="CaptchaAnswer"  class="form-control" placeholder="عبارت امنیتی">
+                <span asp-validation-for="CaptchaAnswer" class="text-danger"></span>
+            </div>
             <div class="widget-content widget--filter-switcher">
                 <div class="form-check form-switch mb-0">
                     <input asp-for="RememberMe" class="form-check-input" >
@@ -27,6 +44,7 @@
                     </label>
                 </div>
             </div>
+
             <div class="form-element-row mb-2">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             </div>
