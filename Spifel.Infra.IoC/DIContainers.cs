@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Spifel.Application.Services.Implementations;
+using Spifel.Domain.Contracts.Services;
+using Spifel.Infra.Data.Services;
 
 namespace Spifel.Infra.IoC
 {
@@ -20,6 +22,7 @@ namespace Spifel.Infra.IoC
 
             #region Services
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IFileService, FileService>();
             #endregion
         }
     }

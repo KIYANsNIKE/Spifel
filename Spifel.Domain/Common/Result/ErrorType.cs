@@ -23,6 +23,8 @@ namespace Spifel.Domain.Common.Result
         Required,
         InvalidEmail,
         InvalidUserName,
+        InvalidFileType,
+        FileTooLarge,
         UserNameTooShort,
         UserNameToolong,
         PasswordTooShort,

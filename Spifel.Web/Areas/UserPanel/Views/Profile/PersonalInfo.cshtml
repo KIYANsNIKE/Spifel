@@ -1,0 +1,522 @@
+﻿@model Spifel.Web.Areas.UserPanel.Feature.Profile.PersonalInfo.PersonalInfoVM
+@{
+    ViewData["Title"] = "";
+}
+<div class="ui-box bg-white mb-5">
+    <div class="ui-box-title">اطلاعات شخصی</div>
+    <div class="ui-box-content">
+        <div class="row avatar">
+            <partial name="_AvatarFiled" />
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">نام</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-name-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted" id="nameValue">@Model.Name</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">نام خانوادگی</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-last-name-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div  class="fs-6 fw-bold text-muted" id="lastNameValue" >@Model.LastName</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">نام کاربری</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-user-name-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted" id="userNameValue">@Model.UserName</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">کد ملی</div>
+                        <button class="btn btn-circle btn-outline-light"
+                                data-remodal-target="personal-info-national-id-modal">
+                            <i class="ri-ball-pen-fill"></i>
+                        </button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted" id="nationalCodeValue">-@Model.NationalCode</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">شماره تلفن همراه</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-phone-number-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted"id="phoneNumberValue">-@Model.PhoneNumber</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">پست الکترونیک</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-email-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted" id="emailValue">@Model.Email</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">تاریخ تولد</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-birth-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted">-@Model.BirthDate</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">روش بازگرداندن وجه</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-returned-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted">-</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="border-bottom py-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="fs-7 fw-bold text-dark">رمز عبور</div>
+                        <button class="btn btn-circle btn-outline-light" data-remodal-target="personal-info-change-password-modal"><i class="ri-ball-pen-fill"></i></button>
+                    </div>
+                    <div class="fs-6 fw-bold text-muted">********</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" asp-area="UserPanel" asp-controller="Profile" asp-action="UpdateUser" onsubmit="disableAC('updateUserButton')">
+        <input type="hidden" asp-for="Name" id="Name"/>
+        <input type="hidden" asp-for="LastName" id="LastName"/>
+        <input type="hidden" asp-for="UserName" id="UserName"/>
+        <input type="hidden" asp-for="PhoneNumber" id="PhoneNumber"/>
+        <input type="hidden" asp-for="Email" id="Email"/>
+        <input type="hidden" asp-for="NationalCode" id="NationalCode"/>
+        <input type="hidden" asp-for="BirthDate" id="BirthDate"/>
+
+        <button type="submit" 
+            class="btn btn-block btn-primary mb-3" 
+            id="updateUserButton" 
+            disabled>
+
+            <i class="ri-user-6-fill me-2"></i> ثبت تغیرات
+
+        </button>
+    </form>
+</div>
+<partial name="_PersonalInfoModals" />
+@section Scripts
+{
+    <partial name="_Alerts" />
+    <script>
+        //Disable After Click
+        function disableAC(id){
+            document.getElementById(id).disabled = true;
+        }
+    </script>
+    <script>
+        function setName() {
+            const value = document.getElementById("nameModalInput").value;
+
+            // مقدار واقعی که قرار است به سرور برود
+            document.getElementById("Name").value = value;
+
+            // نمایش مقدار جدید در صفحه
+            document.getElementById("nameValue").innerText = value;
+
+            checkForChanges();
+
+            // بستن Modal
+            $('[data-remodal-id="personal-info-name-modal"]')
+                .remodal()
+                .close();
+        }
+        function setLastName() {
+            const value = document.getElementById("lastNameModalInput").value;
+
+            // مقدار واقعی که قرار است به سرور برود
+            document.getElementById("LastName").value = value;
+
+            // نمایش مقدار جدید در صفحه
+            document.getElementById("lastNameValue").innerText = value;
+
+            checkForChanges();
+
+            // بستن Modal
+            $('[data-remodal-id="personal-info-last-name-modal"]')
+                .remodal()
+                .close();
+        }
+        function setUserName() {
+            const value = document.getElementById("userNameModalInput").value;
+
+            // مقدار واقعی که قرار است به سرور برود
+            document.getElementById("UserName").value = value;
+
+            // نمایش مقدار جدید در صفحه
+            document.getElementById("userNameValue").innerText = value;
+
+            checkForChanges();
+
+            // بستن Modal
+            $('[data-remodal-id="personal-info-user-name-modal"]')
+                .remodal()
+                .close();
+        }
+        function setNationalCode() {
+            const value = document.getElementById("nationalCodeModalInput").value;
+
+            // مقدار واقعی که قرار است به سرور برود
+            document.getElementById("NationalCode").value = value;
+
+            // نمایش مقدار جدید در صفحه
+            document.getElementById("nationalCodeValue").innerText = value;
+
+            checkForChanges();
+
+            // بستن Modal
+            $('[data-remodal-id="personal-info-national-id-modal"]')
+                .remodal()
+                .close();
+        }
+        function setPhoneNumber() {
+            const value = document.getElementById("phoneNumberModalInput").value;
+
+            // مقدار واقعی که قرار است به سرور برود
+            document.getElementById("PhoneNumber").value = value;
+
+            // نمایش مقدار جدید در صفحه
+            document.getElementById("phoneNumberValue").innerText = value;
+
+            checkForChanges();
+
+            // بستن Modal
+            $('[data-remodal-id="personal-info-phone-number-modal"]')
+                .remodal()
+                .close();
+        }
+        function setEmail() {
+            const value = document.getElementById("emailModalInput").value;
+
+            // مقدار واقعی که قرار است به سرور برود
+            document.getElementById("Email").value = value;
+
+            // نمایش مقدار جدید در صفحه
+            document.getElementById("emailValue").innerText = value;
+
+             checkForChanges();
+
+            // بستن Modal
+            $('[data-remodal-id="personal-info-email-modal"]')
+                .remodal()
+                .close();
+        }
+    </script>
+    <script>
+         const fields = [
+            "Name",
+            "LastName",
+            "UserName",
+            "PhoneNumber",
+            "Email",
+            "NationalCode",
+            "BirthDate"
+        ];
+
+        const originalValues = {};
+
+        fields.forEach(id => {
+            originalValues[id] = document.getElementById(id).value;
+        });
+
+        function checkForChanges() {
+
+            const hasChanges = fields.some(id => {
+                return document.getElementById(id).value !== originalValues[id];
+            });
+
+            document.getElementById("updateUserButton").disabled = !hasChanges;
+        }
+    </script>
+
+
+
+    @* AVATAR *@
+    @* <script>
+        document.getElementById("avatarFile").addEventListener("change", function() {
+
+            const file = this.files[0];
+
+            if (!file) return;
+
+            document.getElementById("avatarPreview").src =
+                URL.createObjectURL(file);
+
+        });
+    </script> *@
+
+    <script>
+
+        const avatarFile = document.getElementById("avatarFile");
+        const avatarPreview = document.getElementById("avatarPreview");
+
+        const avatarSubmitButton =
+            document.getElementById("avatarSubmitButton");
+
+        const avatarCancelButton =
+            document.getElementById("avatarCancelButton");
+
+        const avatarCancelIcon =
+            document.getElementById("avatarCancelIcon");
+
+
+        // نام عکس فعلی کاربر
+        const currentAvatar = "@Model.Avatar";
+
+
+        // تصویر فعلی
+        const originalAvatar = avatarPreview.src;
+
+
+        // اگر کاربر عکس فعلی ندارد
+        // دکمه حذف را مخفی کن
+        if (currentAvatar === "NoPhoto.jpg") {
+            avatarCancelButton.classList.add("d-none");
+        }
+
+
+        // انتخاب تصویر جدید
+        avatarFile.addEventListener("change", function() {
+
+            const file = this.files[0];
+
+            if (!file)
+                return;
+
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+
+                // نمایش Preview
+                avatarPreview.src = e.target.result;
+
+
+                // نمایش دکمه ثبت
+                avatarSubmitButton.classList.remove("d-none");
+
+
+                // نمایش دکمه لغو
+                avatarCancelButton.classList.remove("d-none");
+
+
+                // تبدیل سطل زباله به ×
+                avatarCancelIcon.className = "ri-close-fill";
+
+                avatarCancelButton.title = "لغو انتخاب تصویر";
+            };
+
+
+            reader.readAsDataURL(file);
+        });
+
+
+        // کلیک روی دکمه لغو / حذف
+        avatarCancelButton.addEventListener("click",async function() {
+
+            // آیا عکس جدیدی انتخاب شده؟
+            if (avatarFile.files.length > 0) {
+
+                // لغو عکس جدید
+                avatarFile.value = "";
+
+
+                // برگرداندن عکس قبلی
+                avatarPreview.src = originalAvatar;
+
+
+                // مخفی کردن دکمه ثبت
+                avatarSubmitButton.classList.add("d-none");
+
+
+                // تبدیل × به سطل زباله
+                avatarCancelIcon.className = "ri-delete-bin-fill";
+
+                avatarCancelButton.title = "حذف تصویر";
+
+
+                // اگر عکس قبلی NoPhoto بود،
+                // سطل زباله را هم مخفی کن
+                if (currentAvatar === "NoPhoto.jpg") {
+                    avatarCancelButton.classList.add("d-none");
+                }
+
+                return;
+            }
+            // --------------------------------
+            // حذف عکس فعلی
+            // --------------------------------
+            // اگر عکس جدیدی انتخاب نشده
+            Swal.fire({
+                icon: 'warning',
+                title: 'حذف تصویر پروفایل',
+                text: 'آیا مطمئن هستید که می‌خواهید تصویر پروفایل خود را حذف کنید؟',
+                showCancelButton: true,
+                confirmButtonText: 'بله، حذف کن',
+                cancelButtonText: 'انصراف',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    document.getElementById("deleteAvatarForm").submit();
+                }
+
+            });
+           
+
+        });
+
+    </script>
+    <script>
+        async function changePassword() {
+
+            const form = document.getElementById("changePasswordForm");
+
+            const formData = new FormData(form);
+
+
+            // پاک کردن خطاهای قبلی
+
+            document.getElementById("OldPasswordError").innerText = "";
+            document.getElementById("PasswordError").innerText = "";
+            document.getElementById("RePasswordError").innerText = "";
+            document.getElementById("changePasswordGeneralError").innerText = "";
+
+
+            try {
+
+                const response = await fetch(form.action, {
+
+                    method: "POST",
+
+                    body: formData
+
+                });
+
+
+                const result = await response.json();
+
+
+                // موفقیت
+
+                if (response.ok && result.success) {
+
+                    // بستن Modal
+
+                    $('[data-remodal-id="personal-info-change-password-modal"]')
+                        .remodal()
+                        .close();
+
+
+                    // SweetAlert
+
+                    Swal.fire({
+
+                        icon: 'success',
+
+                        title: 'رمز عبور شما با موفقیت تغییر کرد',
+
+                        html: `
+                            <p>لطفاً مجدداً وارد سایت شوید.</p>
+                            <p>چند ثانیه دیگر به صورت خودکار از حساب کاربری خارج خواهید شد.</p>
+                        `,
+
+                        confirmButtonText: 'ورود مجدد',
+
+                        confirmButtonColor: '#3085d6',
+
+                        timer: 5000,
+
+                        timerProgressBar: true,
+
+                        allowOutsideClick: false,
+
+                        allowEscapeKey: false,
+
+                        allowEnterKey: false,
+
+                        showCloseButton: false,
+
+                        stopKeydownPropagation: true
+
+                    }).then(() => {
+
+                        window.location.href =
+                            '@Url.Action("Logout", "Account", new { area = "" })';
+
+                    });
+
+
+                    return;
+                }
+
+
+                // خطاهای Validation / Business
+
+                if (result.errors) {
+
+                    result.errors.forEach(error => {
+
+                        if (error.propertyName) {
+
+                            const errorElement =
+                                document.getElementById(
+                                    error.propertyName + "Error"
+                                );
+
+                            if (errorElement) {
+
+                                errorElement.innerText =
+                                    error.message;
+
+                            }
+
+                        }
+                        else {
+
+                            document.getElementById(
+                                "changePasswordGeneralError"
+                            ).innerText = error.message;
+
+                        }
+
+                    });
+
+                }
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                document.getElementById(
+                    "changePasswordGeneralError"
+                ).innerText =
+                    "خطایی در ارتباط با سرور رخ داده است.";
+
+            }
+
+        }
+    </script>
+}

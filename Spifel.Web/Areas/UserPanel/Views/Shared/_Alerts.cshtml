@@ -28,6 +28,30 @@
             });
         </script>
         break;
+
+    case "AvatarChanged":
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'تصویر پروفایل شما با موفقیت تغییر کرد',
+                confirmButtonText: 'باشه',
+                confirmButtonColor: '#3085d6'
+            });
+        </script>
+        break; 
+    case "PasswordNotChanged":
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'رمز عبور شما تغییر نکرد',
+                html: `
+                             <p>لطفاً دوباره تلاش کنید.</p>
+                                         `,
+                confirmButtonText: 'باشه',
+                confirmButtonColor: '#3085d6'
+            });
+        </script>
+        break;
 }
 
 

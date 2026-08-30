@@ -2,6 +2,7 @@
 using Spifel.Application.Generator;
 using Spifel.Application.Security;
 using Spifel.Application.Services.Implementations.Features.Register;
+using Spifel.Application.Services.Implementations.Features.Update;
 using Spifel.Domain.Models.User;
 using System;
 using System.Collections.Generic;
@@ -25,5 +26,24 @@ namespace Spifel.Application.Mapper
                 IsEmailActive = false
             };
         }
+
+
+        //public static User ToUser(this UpdateDto dto, User user)
+        //{
+        //    // ایا متود رو out کنم؟
+        //    user.UserName = dto.UserName.FixUserName();
+        //    user.Email = dto.Email.FixEmail();
+        //    user.Password = PasswordHelper.HashPassword(dto);
+        //    user.Avatar = dto.Avatar;
+        //    return user;
+        //    //{
+        //    //    UserName = dto.UserName.FixUserName(),
+        //    //    Email = dto.Email.FixEmail(),
+        //    //    Password = PasswordHelper.HashPassword(dto.Password),
+        //    //    Avatar = dto.Avatar,
+
+        //    //}
+        //}
+
     }
 }
