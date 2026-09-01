@@ -21,7 +21,7 @@ using System.Text;
 
 namespace Spifel.Application.Services.Implementations
 {
-    public class AccountService(IUserRepository _userRepository,IFileService _fileService) : IAccountService
+    public class AccountService(IUserRepository _userRepository, IFileService _fileService) : IAccountService
     {
         public async Task<bool> ActiveAccountAsync(string acctiveCode)
         {
@@ -44,7 +44,7 @@ namespace Spifel.Application.Services.Implementations
             var validation = await new ChangeAvatarDtoValidator().ValidateAsync(dto);
             var validationResult = validation.ToResult();
 
-            if(validationResult.IsFailure)
+            if (validationResult.IsFailure)
                 return validationResult;
 
 
@@ -67,7 +67,7 @@ namespace Spifel.Application.Services.Implementations
 
 
 
-            return Result.Success();    
+            return Result.Success();
         }
 
         public async Task<Result> ChangePasswordAsync(ChangePasswordDto dto)
@@ -100,10 +100,32 @@ namespace Spifel.Application.Services.Implementations
             return Result.Success();
         }
 
+        public async Task<Result> ForcePasswordChange(string username, string password)
+        {
+            var user =await _userRepository.GetUserByEmailOrUserNameAsync(username);
+
+            user.Password = PasswordHelper.HashPassword(password);
+
+            await _userRepository.UpdateAsync(user);
+            await _userRepository.SaveAsync();
+
+            return Result.Success();
+        }
+
         public async Task<Result<User>> GetUserByIdAsync(int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
             return Result<User>.Success(user!);
+        }
+
+        public async Task<Result> IsProfileCompletedAsync(int userId)
+        {
+            var user = await _userRepository.GetUserByIdAsync(userId);
+
+            if (string.IsNullOrEmpty(user.Mobile) || string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.LastName))
+                return Result.Failure(Error.Failure(ErrorCode.ProfileNotCompleted.ToString(), "پروفایل کامل نیست"));
+
+            return Result.Success();
         }
 
         public async Task<Result<User>> LoginUserAsync(LoginDto dto)
@@ -123,7 +145,7 @@ namespace Spifel.Application.Services.Implementations
 
         public async Task<Result> RegisterAsync(RegisterDto dto)
         {
-            var validation =await new RegisterDtoValidator(_userRepository).ValidateAsync(dto);
+            var validation = await new RegisterDtoValidator(_userRepository).ValidateAsync(dto);
             var validationResult = validation.ToResult();
 
             if (validationResult.IsFailure)

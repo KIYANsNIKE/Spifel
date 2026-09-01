@@ -7,6 +7,7 @@
             @await Component.InvokeAsync("UserPanel")
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
+            @await Component.InvokeAsync("IsProfileCompleted")
             @RenderBody()
         </div>
     </div>

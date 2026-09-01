@@ -7,7 +7,7 @@ namespace Spifel.Web.Extensions
     {
         public static int GetId(this ClaimsPrincipal claims)
         {
-            return int.Parse(claims.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return int.Parse(claims.FindFirstValue(ClaimTypes.NameIdentifier));
         }
     }
 }

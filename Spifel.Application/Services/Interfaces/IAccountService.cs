@@ -21,5 +21,7 @@ namespace Spifel.Application.Services.Interfaces
         Task<Result> UpdateUserAsync(UpdateDto dto);
         Task<Result> ChangeAvatarAsync(ChangeAvatarDto dto);
         Task<Result> DeleteAvatarAsync(int userId);
+        Task<Result> IsProfileCompletedAsync(int userId);
+        Task<Result> ForcePasswordChange(string username,string password);
     }
 }

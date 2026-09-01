@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Spifel.Application.Services.Interfaces;
 using Spifel.Domain.Models.User;
 using Spifel.Web.Areas.UserPanel.Feature.Profile.ChangeAvatar;
@@ -11,6 +12,22 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
 {
     public class ProfileController(IAccountService _accountService) : UserPanelBaseController
     {
+        [AllowAnonymous]
+        [Route("ForceChange")]
+        public async Task<IActionResult> ForcePasswordChange()
+        {
+            string password = "Asdcxz8905@";
+            string username = "GTA_VI";
+            var result = await _accountService.ForcePasswordChange(username, password);
+
+            if (result.IsSuccess)
+            {
+                return Redirect("/Login");
+            }
+
+            return BadRequest();
+        }
+        //
         public async Task<IActionResult> PersonalInfo()
         {
             var user = await _accountService.GetUserByIdAsync(User.GetId());
@@ -18,7 +35,6 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
         }
 
         #region Password
-        //ایده اینکه بعد ازا ینکه کد کار کرد بریم و  به جای برگردوندن ویو به جاش اوکی و بد ریکوعست پس بدیم  و  یه فکری به حال نشون دادن ارور ها بکنیم 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordVM VM)

@@ -36,6 +36,7 @@ namespace Spifel.Domain.Common.Result
         EmailAlreadyExists,
         UserNotFound,
         UserNotActive,
+        ProfileNotCompleted,
 
         // System
         UnexpectedError
