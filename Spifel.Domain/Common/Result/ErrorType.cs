@@ -21,8 +21,11 @@ namespace Spifel.Domain.Common.Result
 
         // Validation
         Required,
+        TooLong,
+        TooShort,
         InvalidEmail,
         InvalidUserName,
+        InvalidPhoneNumber,
         InvalidFileType,
         FileTooLarge,
         UserNameTooShort,

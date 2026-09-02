@@ -163,14 +163,19 @@ namespace Spifel.Application.Services.Implementations
         public async Task<Result> UpdateUserAsync(UpdateDto dto)
         {
             var user = await _userRepository.GetUserByIdAsync(dto.Id);
-            //mapper later
+            User oldUser = user;
             // Username , Email AUTHENTICATION
-            user.UserName = dto.UserName;
-            user.FirstName = dto.Name;
-            user.LastName = dto.LastName;
-            user.Email = dto.Email;
-            user.Mobile = dto.PhoneNumber;
-            //mapper later
+            var validation = await new UpdateDtoValidator(_userRepository,user).ValidateAsync(dto);
+            var validationResult = validation.ToResult();
+            if (validationResult.IsFailure)
+                return validationResult;
+
+
+            user = dto.ToUser(user);
+
+            if (oldUser == user)
+                return Result.Success();
+
             await _userRepository.UpdateAsync(user);
             await _userRepository.SaveAsync();
             return Result.Success();

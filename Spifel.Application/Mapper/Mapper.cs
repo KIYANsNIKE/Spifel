@@ -28,22 +28,15 @@ namespace Spifel.Application.Mapper
         }
 
 
-        //public static User ToUser(this UpdateDto dto, User user)
-        //{
-        //    // ایا متود رو out کنم؟
-        //    user.UserName = dto.UserName.FixUserName();
-        //    user.Email = dto.Email.FixEmail();
-        //    user.Password = PasswordHelper.HashPassword(dto);
-        //    user.Avatar = dto.Avatar;
-        //    return user;
-        //    //{
-        //    //    UserName = dto.UserName.FixUserName(),
-        //    //    Email = dto.Email.FixEmail(),
-        //    //    Password = PasswordHelper.HashPassword(dto.Password),
-        //    //    Avatar = dto.Avatar,
-
-        //    //}
-        //}
+        public static User ToUser(this UpdateDto dto, User user)
+        {
+            user.UserName = dto.UserName;
+            user.FirstName = dto.Name;
+            user.LastName = dto.LastName;
+            user.Email = dto.Email;
+            user.Mobile = dto.PhoneNumber;
+            return user;
+        }
 
     }
 }
