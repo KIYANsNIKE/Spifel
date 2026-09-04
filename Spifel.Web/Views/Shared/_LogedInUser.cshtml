@@ -11,13 +11,17 @@
                     <div class="profile-detail">
                         <div class="d-flex align-items-center">
                             <div class="profile-avatar me-3">
-                                <img src="/theme-assets/images/avatar/default.png" alt="avatar">
+                                <img src="/Profiles/@User.FindFirst("Avatar").Value.ToString()" alt="avatar">
                             </div>
                             <div class="profile-info">
                                 <a asp-area="UserPanel" class="text-decoration-none text-dark fw-bold mb-2">
-                                    @User.Identity.Name سلام
+                                    @{
+                                            string fullName = User.FindFirst("FullName").Value.ToString();
+                                            string showName = !fullName.IsWhiteSpace() ? fullName : User.Identity.Name;
+                                        }
+                                    سلام   @showName
                                 </a>
-                                <div class="text-muted fs-7 fw-bold">۰۹xxxxxxxxx</div>
+                                <div class="text-muted fs-7 fw-bold">@User.FindFirst("Mobile").Value.ToString()</div>
                             </div>
                         </div>
                         <div class="user-options">

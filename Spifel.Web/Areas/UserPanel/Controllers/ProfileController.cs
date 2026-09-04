@@ -98,7 +98,7 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
                 return View(nameof(PersonalInfo), VM);
             }
             // Save
-
+            await RefreshUserClaimsAsync();
             return RedirectToAction(nameof(PersonalInfo));
         }
 
@@ -119,6 +119,7 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
             }
             else
             {
+                await RefreshUserClaimsAsync();
                 TempData["Alert"] = "AvatarChanged";
                 return RedirectToAction(nameof(PersonalInfo));
             }
@@ -137,6 +138,7 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
                 ModelState.AddResultErrors(result.Errors);
                 return View(nameof(PersonalInfo));
             }
+            await RefreshUserClaimsAsync();
             TempData["Alert"] = "AvatarDeleted";
             return RedirectToAction(nameof(PersonalInfo));
         }

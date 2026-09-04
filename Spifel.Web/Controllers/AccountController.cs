@@ -15,7 +15,7 @@ using System.Security.Claims;
 
 namespace Spifel.Web.Controllers
 {
-    public class AccountController(IAccountService _accountService) : Controller
+    public class AccountController(IAccountService _accountService) : BaseController
     {
         #region Captcha
         public Captcha Captcha
@@ -81,9 +81,9 @@ namespace Spifel.Web.Controllers
             }
 
             this.Captcha = new Captcha(140);
-            
+
             ViewBag.ReturnUrl = returnUrl;
-            return View(new LoginVM() { ImageData = this.Captcha.ImageData});
+            return View(new LoginVM() { ImageData = this.Captcha.ImageData });
         }
 
         // باید کپچا رو تمیز بنویسم 
@@ -96,7 +96,7 @@ namespace Spifel.Web.Controllers
             if (!validationResult.IsValid)
             {
                 ModelState.AddFluentValidationErrors(validationResult);
-                if (validationResult.Errors.Any(e=>e.PropertyName == "CaptchaAnswer"))
+                if (validationResult.Errors.Any(e => e.PropertyName == "CaptchaAnswer"))
                 {
                     this.Captcha = new Captcha(140);
                     loginVM.ImageData = this.Captcha.ImageData;
@@ -123,21 +123,8 @@ namespace Spifel.Web.Controllers
             }
 
             var user = result.Value;
-            var claims = new List<Claim>()
-            {
-                new(ClaimTypes.NameIdentifier,user.id.ToString()),
-                new(ClaimTypes.Name,user.UserName),
-                new("FullName",$"{user.FirstName} {user.LastName}")
-            };
+            await RefreshUserClaimsAsync(user, loginVM.RememberMe);
 
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
-            var properties = new AuthenticationProperties()
-            {
-                IsPersistent = loginVM.RememberMe
-            };
-
-            await HttpContext.SignInAsync(principal, properties);
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);

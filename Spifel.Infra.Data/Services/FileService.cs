@@ -26,7 +26,7 @@ namespace Spifel.Infra.Data.Services
 
             var extension = Path.GetExtension(file.FileName);
 
-            var fileName = $"{Guid.NewGuid()}{extension}";
+            var fileName = $"{Guid.NewGuid().ToString().Replace("-", "")}{extension}";
 
             var filePath = Path.Combine(
                 uploadsFolder,
