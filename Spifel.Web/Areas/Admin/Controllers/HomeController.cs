@@ -6,7 +6,7 @@ namespace Spifel.Web.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Admin area");
+            return View();
         }
     }
 }
