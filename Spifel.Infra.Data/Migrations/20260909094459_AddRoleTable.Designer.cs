@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spifel.Infra.Data.Context;
 
@@ -11,9 +12,11 @@ using Spifel.Infra.Data.Context;
 namespace Spifel.Infra.Data.Migrations
 {
     [DbContext(typeof(SpifelDbContext))]
-    partial class SpifelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260909094459_AddRoleTable")]
+    partial class AddRoleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

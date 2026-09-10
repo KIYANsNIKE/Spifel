@@ -16,7 +16,7 @@ namespace Spifel.Web.Areas.UserPanel.Controllers
         [Route("ForceChange")]
         public async Task<IActionResult> ForcePasswordChange()
         {
-            string password = "Asdcxz8905@";
+            string password = "AAaa1234@@";
             string username = "GTA_VI";
             var result = await _accountService.ForcePasswordChange(username, password);
 

@@ -36,6 +36,8 @@ namespace Spifel.Infra.Data.Configurations.UserConfig
             builder.HasMany(u => u.UserAddresses)
                .WithOne(ua => ua.User);
 
+            builder.HasMany(u=>u.UserInRoles).WithOne(u=>u.User)
+                .HasForeignKey(u=>u.UserId).OnDelete(DeleteBehavior.Cascade);
             #endregion
         }
     }

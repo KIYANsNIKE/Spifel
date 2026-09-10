@@ -1,4 +1,5 @@
 ﻿using Spifel.Domain.Models.Common;
+using Spifel.Domain.Models.Role;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +25,7 @@ namespace Spifel.Domain.Models.User
 
         #region Realations
         public ICollection<UserAddress>? UserAddresses { get; set; }
+        public ICollection<UserInRoles>? UserInRoles { get; set; }
 
         #endregion
     }
