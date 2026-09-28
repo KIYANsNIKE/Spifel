@@ -14,6 +14,17 @@ namespace Spifel.Application.Convertor
                 pc.GetMonth(date).ToString("00") + "/" +
                 pc.GetDayOfMonth(date).ToString("00");
         }
+        public static string ToShamsi(this DateTime? date)
+        {
+            if (date is null)
+                return "-";
+
+            var pc = new PersianCalendar();
+
+            return pc.GetYear(date.Value) + "/" +
+                   pc.GetMonth(date.Value).ToString("00") + "/" +
+                   pc.GetDayOfMonth(date.Value).ToString("00");
+        }
         public static string ToShamsiWithTime(this DateTime date)
         {
             var pc = new PersianCalendar();
@@ -22,6 +33,19 @@ namespace Spifel.Application.Convertor
                 pc.GetDayOfMonth(date).ToString("00") + " - " +
                 pc.GetHour(date).ToString("00") + ":" +
                 pc.GetMinute(date).ToString("00");
+
+        }
+        public static string ToShamsiWithTime(this DateTime? date)
+        {
+            if (date is null)
+                return "-";
+
+            var pc = new PersianCalendar();
+            return pc.GetYear(date.Value) + "/" +
+                pc.GetMonth(date.Value).ToString("00") + "/" +
+                pc.GetDayOfMonth(date.Value).ToString("00") + " - " +
+                pc.GetHour(date.Value).ToString("00") + ":" +
+                pc.GetMinute(date.Value).ToString("00");
 
         }
     }

@@ -22,6 +22,7 @@ namespace Spifel.Infra.IoC
 
             #region Services
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IFileService, FileService>();
             #endregion
         }
